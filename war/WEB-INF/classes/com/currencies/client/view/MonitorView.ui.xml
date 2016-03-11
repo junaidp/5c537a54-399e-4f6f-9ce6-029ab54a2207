@@ -1,0 +1,20 @@
+<!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
+<ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder"
+	xmlns:g="urn:import:com.google.gwt.user.client.ui">
+	<ui:style>
+	.important {
+		font-weight: bold;
+	}
+	</ui:style>
+	<div style="padding:40%">
+		<g:HorizontalPanel spacing="5">
+			<g:Label text="Last calculation on  :  "></g:Label>
+			<g:Label ui:field="lblLastCalculation" styleName="blue"></g:Label>
+		</g:HorizontalPanel>
+		<g:Image ui:field="imgRefresh" url="refresh.png"></g:Image>
+		<g:TextBox ui:field="txtCurrenyName"></g:TextBox>
+		<g:Button ui:field="btnAddCurrency">Add</g:Button>
+		<g:VerticalPanel ui:field="tableContainer"></g:VerticalPanel>
+
+	</div>
+</ui:UiBinder> 
