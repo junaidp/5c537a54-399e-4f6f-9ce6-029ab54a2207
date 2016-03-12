@@ -35,3 +35,7 @@ h1 {
 .blue{
 	color: blue;
 }
+.point{
+	cursor: pointer;
+}
+

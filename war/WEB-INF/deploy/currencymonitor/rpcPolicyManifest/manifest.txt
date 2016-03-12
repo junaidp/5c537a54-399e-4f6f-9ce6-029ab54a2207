@@ -1,2 +1,3 @@
 # Module currencymonitor
 # RPC service class, partial path of RPC policy file
+com.currencies.client.CurrencyService, BF30B1FA9A78380878156C6D2616168B.gwt.rpc

@@ -42,6 +42,8 @@ public class MonitorView extends Composite implements Display {
 	Label lblLastCalculation;
 	@UiField
 	Image imgRefresh;
+	@UiField
+	Label lblError;
 
 	public MonitorView() {
 		initWidget(uiBinder.createAndBindUi(this));
@@ -128,6 +130,14 @@ public class MonitorView extends Composite implements Display {
 
 	public void setLblLastCalculation(Label lblLastCalculation) {
 		this.lblLastCalculation = lblLastCalculation;
+	}
+
+	public Label getLblError() {
+		return lblError;
+	}
+
+	public void setLblError(Label lblError) {
+		this.lblError = lblError;
 	}
 
 	

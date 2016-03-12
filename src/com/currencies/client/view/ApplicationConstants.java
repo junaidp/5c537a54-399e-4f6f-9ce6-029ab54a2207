@@ -7,4 +7,6 @@ public class ApplicationConstants {
 	public static final String TOKEN_MONITOR = "monitor";
 	public static final String TOKEN_MAIN = "main";
 	public static final String ENTER_CURRENCY = "Enter currency symbol";
+	public static final String CURRENCY_INVALID = "Currency Name invalid, Please enter a valid currency symbol";
+	public static final String CURRENCY_ALREADY_ADDED = "Currency Already Added";
 }

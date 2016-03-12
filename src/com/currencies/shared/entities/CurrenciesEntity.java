@@ -2,8 +2,6 @@ package com.currencies.shared.entities;
 
 
 import java.io.Serializable;
-import java.util.Date;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -30,6 +28,9 @@ public class CurrenciesEntity   implements Serializable {
 	
 	@Transient
 	private float priceInHKD;
+	
+	@Transient
+	private String change;
 	
 	
 	public CurrenciesEntity(){}
@@ -62,6 +63,16 @@ public class CurrenciesEntity   implements Serializable {
 
 	public void setPriceInHKD(float priceInHKD) {
 		this.priceInHKD = priceInHKD;
+	}
+
+
+	public String getChange() {
+		return change;
+	}
+
+
+	public void setChange(String change) {
+		this.change = change;
 	}
 
 

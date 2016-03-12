@@ -1,0 +1,2 @@
+serviceClass: com.currencies.client.CurrencyService
+path: BF30B1FA9A78380878156C6D2616168B.gwt.rpc

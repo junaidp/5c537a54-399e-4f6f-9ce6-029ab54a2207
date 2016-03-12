@@ -22,9 +22,7 @@ public class AppController implements Presenter, ValueChangeHandler<String> {
 
 	private final CurrencyServiceAsync rpcService; 
 	private HasWidgets container;
-	private String createPasswordtoken ="";
-	private String beanName ;
-	
+		
 	Presenter presenter = null;
 
 	public AppController(CurrencyServiceAsync rpcService, HandlerManager eventBus) {

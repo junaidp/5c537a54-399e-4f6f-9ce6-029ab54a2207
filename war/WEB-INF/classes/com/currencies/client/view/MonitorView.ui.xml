@@ -6,15 +6,20 @@
 		font-weight: bold;
 	}
 	</ui:style>
-	<div style="padding:40%">
-		<g:HorizontalPanel spacing="5">
-			<g:Label text="Last calculation on  :  "></g:Label>
-			<g:Label ui:field="lblLastCalculation" styleName="blue"></g:Label>
-		</g:HorizontalPanel>
-		<g:Image ui:field="imgRefresh" url="refresh.png"></g:Image>
-		<g:TextBox ui:field="txtCurrenyName"></g:TextBox>
-		<g:Button ui:field="btnAddCurrency">Add</g:Button>
-		<g:VerticalPanel ui:field="tableContainer"></g:VerticalPanel>
-
+	<g:HTMLPanel>
+	<div style="padding-left:40%; padding-top:10px">
+		<g:HTMLPanel>
+		<g:Label ui:field="lblError" width="100%" styleName="serverResponseLabelError"></g:Label>
+		<g:Image ui:field="imgRefresh" url="refresh.png" styleName="point" title="refresh"></g:Image>
+		
+			<g:HorizontalPanel spacing="5">
+				<g:Label text="Last calculation on  :  "></g:Label>
+				<g:Label ui:field="lblLastCalculation" styleName="blue"></g:Label>
+			</g:HorizontalPanel>
+				<g:TextBox ui:field="txtCurrenyName"></g:TextBox>
+			<g:Button ui:field="btnAddCurrency">Add</g:Button>
+			<g:VerticalPanel ui:field="tableContainer"></g:VerticalPanel>
+		</g:HTMLPanel>
 	</div>
+	</g:HTMLPanel>
 </ui:UiBinder> 

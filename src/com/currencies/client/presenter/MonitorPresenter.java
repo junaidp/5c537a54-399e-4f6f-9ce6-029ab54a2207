@@ -5,9 +5,9 @@ import java.util.ArrayList;
 import java.util.Date;
 
 import com.currencies.client.CurrencyServiceAsync;
-import com.currencies.client.event.MonitorEvent;
 import com.currencies.client.view.ApplicationConstants;
 import com.currencies.client.view.DisplayAlert;
+import com.currencies.client.view.LoadingPopup;
 import com.currencies.shared.entities.CurrenciesEntity;
 import com.google.gwt.cell.client.FieldUpdater;
 import com.google.gwt.event.dom.client.ClickEvent;
@@ -15,17 +15,15 @@ import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.event.shared.HandlerManager;
 import com.google.gwt.user.cellview.client.CellTable;
 import com.google.gwt.user.cellview.client.Column;
-import com.google.gwt.user.client.History;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.rpc.AsyncCallback;
-import com.google.gwt.user.client.ui.Anchor;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.HasWidgets;
 import com.google.gwt.user.client.ui.Image;
 import com.google.gwt.user.client.ui.Label;
-import com.google.gwt.user.client.ui.RootPanel;
 import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.client.ui.Widget;
+
 
 
 public class MonitorPresenter implements Presenter 
@@ -46,6 +44,7 @@ public class MonitorPresenter implements Presenter
 		TextBox getTxtCurrenyName();
 		Column<CurrenciesEntity, String> getDeleteColumn();
 		Label getLblLastCalculation();
+		Label getLblError();
 
 	}  
 
@@ -123,15 +122,23 @@ public class MonitorPresenter implements Presenter
 
 				@Override
 				public void onFailure(Throwable caught) {
-					Window.alert("Currency Name invalid, Please add a valid currency symbol");
+					display.getLblError().setText(ApplicationConstants.CURRENCY_INVALID);
 				}
 
 				@Override
 				public void onSuccess(String result) {
+					if(result.equals(ApplicationConstants.CURRENCY_ALREADY_ADDED)){
+						display.getLblError().setText(result);
+					}else{
+					display.getLblError().setText("");
 					new DisplayAlert(result);
 					fetchCurrencyCalculations();
+					}
 				}
 			});
+		}
+		else{
+			display.getLblError().setText(ApplicationConstants.CURRENCY_INVALID);
 		}
 	}
 
@@ -140,16 +147,25 @@ public class MonitorPresenter implements Presenter
 	}
 
 	private void fetchCurrencyCalculations() {
-
+		final LoadingPopup loadingPopup = new LoadingPopup();
+		loadingPopup.display();
 		rpcService.fetchCurrencyCalculations(new AsyncCallback<ArrayList<CurrenciesEntity>>() {
 
 			@Override
 			public void onFailure(Throwable caught) {
 				Window.alert(caught+"");
+				if(loadingPopup!=null){
+					loadingPopup.remove();
+				}
 			}
 
 			@Override
 			public void onSuccess(ArrayList<CurrenciesEntity> result) {
+				
+				if(loadingPopup!=null){
+					loadingPopup.remove();
+				}
+				display.getLblError().setText("");
 				display.getTableCurrencies().setRowData(0, result);
 				display.getTableCurrencies().setRowCount(result.size());
 				display.getLblLastCalculation().setText(new Date()+"");

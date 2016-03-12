@@ -15,4 +15,5 @@ public interface CurrencyService extends RemoteService {
 	ArrayList<CurrenciesEntity> fetchCurrencyCalculations()throws Exception;
 	String addCurrency(String currencyName) throws Exception;
 	String deleteCurrency(int currencyId)throws Exception;
+	 
 }

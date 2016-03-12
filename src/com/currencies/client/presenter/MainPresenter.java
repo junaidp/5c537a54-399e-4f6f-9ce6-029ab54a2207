@@ -3,14 +3,9 @@ package com.currencies.client.presenter;
 
 import com.currencies.client.CurrencyServiceAsync;
 import com.currencies.client.event.MonitorEvent;
-import com.currencies.client.view.ApplicationConstants;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.event.shared.HandlerManager;
-import com.google.gwt.user.client.History;
-import com.google.gwt.user.client.Window;
-import com.google.gwt.user.client.rpc.AsyncCallback;
-import com.google.gwt.user.client.ui.Anchor;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.HasWidgets;
 import com.google.gwt.user.client.ui.RootPanel;
@@ -21,7 +16,7 @@ import com.google.gwt.user.client.ui.Widget;
 public class MainPresenter implements Presenter 
 
 {
-	
+
 	private final Display display;
 	private final CurrencyServiceAsync rpcService;
 	private final HandlerManager eventBus;
@@ -31,7 +26,7 @@ public class MainPresenter implements Presenter
 		Widget asWidget();
 		TextBox getTxtGetIn();
 		Button getBtnGetIn();
-	
+
 	}  
 
 	public MainPresenter(CurrencyServiceAsync rpcService, HandlerManager eventBus, Display view) 
@@ -39,7 +34,7 @@ public class MainPresenter implements Presenter
 		this.display = view;
 		this.rpcService = rpcService;
 		this.eventBus = eventBus;
-		
+
 	}
 
 	public void go(HasWidgets container) 
@@ -52,13 +47,13 @@ public class MainPresenter implements Presenter
 	private void bind() {
 		setHandlers();
 		RootPanel.get("loadingMessage").setVisible(false);
-	
+
 	}
 
 	@Override
 	public void setHandlers() {
-		
-	
+
+
 		display.getBtnGetIn().addClickHandler(new ClickHandler(){
 
 			@Override
@@ -66,12 +61,12 @@ public class MainPresenter implements Presenter
 				display.getBtnGetIn().setEnabled(false);
 				eventBus.fireEvent(new MonitorEvent());
 			}});
-		
+
 	}
-	
-	
-	
-	
-	
-	
+
+
+
+
+
+
 }

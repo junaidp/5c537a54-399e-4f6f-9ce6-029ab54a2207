@@ -7,7 +7,6 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import com.currencies.client.CurrencyService;
 import com.currencies.database.SQLHelper;
-import com.currencies.shared.FieldVerifier;
 import com.currencies.shared.entities.CurrenciesEntity;
 import com.google.gwt.user.server.rpc.RemoteServiceServlet;
 
