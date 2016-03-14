@@ -30,6 +30,7 @@ public class MonitorView extends Composite implements Display {
 	private Column<CurrenciesEntity, String> currencyNameColumn;
 	private Column<CurrenciesEntity, String> hkdPriceColumn;
 	private Column<CurrenciesEntity, String> deleteColumn;
+	private Column<CurrenciesEntity, String> changeColumn;
 	private CellTable<CurrenciesEntity> tableCurrencies = new CellTable<CurrenciesEntity>();
 	
 	@UiField
@@ -47,7 +48,7 @@ public class MonitorView extends Composite implements Display {
 
 	public MonitorView() {
 		initWidget(uiBinder.createAndBindUi(this));
-		tableCurrencies.setWidth("300px");
+		tableCurrencies.setWidth("500px");
 		tableContainer.add(tableCurrencies);
 		txtCurrenyName.getElement().setPropertyString("placeholder", ApplicationConstants.ENTER_CURRENCY);
 		tableLayout();
@@ -73,6 +74,14 @@ public class MonitorView extends Composite implements Display {
 			}
 		};
 		tableCurrencies.addColumn(hkdPriceColumn,"price in HKD");
+		
+		changeColumn = new Column<CurrenciesEntity, String>(new TextCell()) {
+			@Override
+			public String getValue(CurrenciesEntity object) {
+				return object.getChange();
+			}
+		};
+		tableCurrencies.addColumn(changeColumn,"change");
 		
 		deleteColumn = new Column<CurrenciesEntity, String>(new ButtonCell()) {
 			@Override

@@ -91,7 +91,10 @@ public class MonitorPresenter implements Presenter
 
 			@Override
 			public void update(int index, CurrenciesEntity currenciesEntity , String value) {
+				boolean confirmed = Window.confirm(ApplicationConstants.CONFIRM_REMOVE);
+				if(confirmed){
 				deleteCurreny(currenciesEntity);
+				}
 			}
 
 
@@ -99,15 +102,23 @@ public class MonitorPresenter implements Presenter
 	}
 
 	private void deleteCurreny(CurrenciesEntity currenciesEntity) {
+		final LoadingPopup loadingPopup = new LoadingPopup();
+		loadingPopup.display();
 		rpcService.deleteCurrency(currenciesEntity.getCurrencyId(), new AsyncCallback<String>() {
 
 			@Override
 			public void onFailure(Throwable caught) {
 				Window.alert(caught+"");
+				if(loadingPopup != null){
+					loadingPopup.remove();
+				}
 			}
 
 			@Override
 			public void onSuccess(String result) {
+				if(loadingPopup != null){
+					loadingPopup.remove();
+				}
 				new DisplayAlert(result);
 				fetchCurrencyCalculations();
 			}
@@ -118,15 +129,23 @@ public class MonitorPresenter implements Presenter
 	private void addCurrency() {
 		String currency = display.getTxtCurrenyName().getText();
 		if(verifyCurrency(currency)){
+			final LoadingPopup loadingPopup = new LoadingPopup();
+			loadingPopup.display();
 			rpcService.addCurrency(currency, new AsyncCallback<String>() {
 
 				@Override
 				public void onFailure(Throwable caught) {
+					if(loadingPopup != null){
+						loadingPopup.remove();
+					}
 					display.getLblError().setText(ApplicationConstants.CURRENCY_INVALID);
 				}
 
 				@Override
 				public void onSuccess(String result) {
+					if(loadingPopup != null){
+						loadingPopup.remove();
+					}
 					if(result.equals(ApplicationConstants.CURRENCY_ALREADY_ADDED)){
 						display.getLblError().setText(result);
 					}else{
